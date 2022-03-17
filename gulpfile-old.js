@@ -12,12 +12,49 @@ const handlebars = require('gulp-compile-handlebars');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const extname = require('gulp-extname');
-const hb = require('gulp-hb');
-const through = require('through2');
+//const assemble = require('assemble');
 
+//const app = assemble();
 
 
 const testJsonFile = require('./src/data/test.json');
+
+
+//Assemble HTML from hbs
+
+// gulp.task('html', function() {
+//   app.data('./src/data/*.{json,yml}');
+//   app.partials('./src/views/partials/**/*.hbs');
+//   app.layouts('./src/views/layouts/*.hbs');
+//   app.pages('./src/views/pages/*.hbs');
+//   app.helper('sanitize', helpers.sanitize);
+//   app.helper('ifCond', helpers.ifCond);
+
+//   app.option('layout', 'default');
+
+//   return app.toStream('pages')
+//     .pipe(app.renderFile())
+//     .pipe(htmlmin())
+//     .pipe(extname())
+//     .pipe(app.dest('./dev/'));
+// });
+
+
+
+// function html() {
+//   app.data('./src/data/**/*.json');
+//   app.components('./src/views/components/**/*.hbs');
+//   app.base('./src/views/base/**/*.hbs');
+//   app.pages('./src/views/*.hbs');
+
+//   app.pages('layout', 'default');
+
+//   return app.toStream('pages')
+//     .pipe(app.renderFile())
+//     .pipe(extname())
+//     .pipe(app.dest('dist'));
+// }
+
 
 // Static server
 function server() {
@@ -30,40 +67,15 @@ function server() {
   });
 };
 
-
-// function hbs() {
-//   return src('src/views/*.hbs')
-//   .pipe(handlebars({testJsonFile}, { //.pipe(handlebars({testJsonFile}, {
-//     ignorePartials: false,
-//     batch: ['src/views/']
-//   })).pipe(rename({
-//     extname: '.html'
-//   })).pipe(dest('dist'));
-// }
-
-function basic() {
-  return src('./src/views/*.hbs')
-      .pipe(hb()
-          .partials('./src/views/**/*.hbs')
-          .helpers('./src/views/*.js')
-          .data('./src/data/**/*.{js,json}')
-      ).pipe(rename({
-          extname: '.html'
-       })).pipe(dest('dist'));
-     // .pipe(dest('dist'));
+function hbs() {
+  return src('src/views/*.hbs')
+  .pipe(handlebars({testJsonFile}, { //.pipe(handlebars({testJsonFile}, {
+    ignorePartials: false,
+    batch: ['src/views/']
+  })).pipe(rename({
+    extname: '.html'
+  })).pipe(dest('dist'));
 }
-
-// function hbs() {
-//   return src('src/views/*.hbs')
-//   .pipe(handlebars({testJsonFile}, { //.pipe(handlebars({testJsonFile}, {
-//     ignorePartials: false,
-//     batch: ['src/views/']
-//   })).pipe(rename({
-//     extname: '.html'
-//   })).pipe(dest('dist'));
-// }
-
-
 
 //compile, prefix, and min scss
 function compilescss() {
@@ -75,21 +87,16 @@ function compilescss() {
     // .pipe(sass())
     // .pipe(prefix('last 2 versions'))
     // .pipe(minify())
-    .pipe(dest('dist/css')) // change to your final/public directory
+    // .pipe(dest('dist/css')) // change to your final/public directory
 };
 
 //Copy all Data to dist
-function copyfonts() {
-  return src(`./src/fonts/**/*`)
-    .pipe(dest(`dist/fonts`));
+function copyFiles(files) {
+  return src(`src/${files}/**/*`)
+    .pipe(dest(`dist/${files}`));
 }
-
-function copyData() {
-  return src(`./src/data/**/*.json`)
-    .pipe(dest(`dist/data`));
-}
-// copyFiles('data');
-// copyFiles('fonts');
+copyFiles('data');
+copyFiles('fonts');
 
 
 // function copyfonts() {
@@ -125,27 +132,22 @@ function jsmin(){
 //watchtask
 function watchTask(){
   server();
-  // copyFiles('data');
-  //copyFiles('fonts');
-
+  copyFiles('data');
+  copyFiles('fonts');
+  //html();
   watch('src/scss/**/*.scss', compilescss).on('change', browserSync.reload); // change to your source directory
   watch('src/js/*.js', jsmin).on('change', browserSync.reload); // change to your source directory
   watch('src/images/*', optimizeimg).on('change', browserSync.reload); // change to your source directory
   watch('dist/images/*.{jpg,png}', webpImage).on('change', browserSync.reload); // change to your source directory
-  //watch('src/views/**/*.hbs', hbs).on('change', browserSync.reload);
-  watch('src/data/**/*.json', copyData).on('change', browserSync.reload); 
-  watch('src/views/**/*.hbs', basic).on('change', browserSync.reload);
-
+  watch('src/views/**/*.hbs', hbs).on('change', browserSync.reload);
+  //watch('src/template/**/*.hbs', ['hbs']).on("change", browserSync.reload);
 }
 
 
 // Default Gulp task 
 exports.default = series(
-  basic,
-  copyData,
-  copyfonts,
-  //copyFiles,
-  //hbs,
+  copyFiles,
+  hbs,
   compilescss,
   jsmin,
   optimizeimg,
