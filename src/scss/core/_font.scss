@@ -1,0 +1,91 @@
+$fontPath: '../fonts';
+
+@mixin font-data {
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'samsung'; 
+    src: url('#{$fontPath}/samsung/SamsungSans-Light.eot');
+    src: url('#{$fontPath}/samsung/SamsungSans-Light.eot?#iefix') format('embedded-opentype'),
+        url('#{$fontPath}/samsung/SamsungSans-Light.woff2') format('woff2'),
+        url('#{$fontPath}/samsung/SamsungSans-Light.woff') format('woff'),
+        url('#{$fontPath}/samsung/SamsungSans-Light.ttf') format('truetype'),
+        url('#{$fontPath}/samsung/SamsungSans-Light.svg#SamsungSans-Light') format('svg');
+    font-weight: 300;
+    @include font-data;
+}
+
+@font-face {
+    font-family: 'samsung'; 
+    src: url('#{$fontPath}/samsung/SamsungSans-Regular.eot');
+    src: url('#{$fontPath}/samsung/SamsungSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('#{$fontPath}/samsung/SamsungSans-Regular.woff2') format('woff2'),
+        url('#{$fontPath}/samsung/SamsungSans-Regular.woff') format('woff'),
+        url('#{$fontPath}/samsung/SamsungSans-Regular.ttf') format('truetype'),
+        url('#{$fontPath}/samsung/SamsungSans-Regular.svg#SamsungSans-Regular') format('svg');
+    font-weight: normal;
+    @include font-data;
+}
+@font-face {
+    font-family: 'samsung';  
+    src: url('#{$fontPath}/samsung/SamsungSans-Bold.eot');
+    src: url('#{$fontPath}/samsung/SamsungSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('#{$fontPath}/samsung/SamsungSans-Bold.woff2') format('woff2'),
+        url('#{$fontPath}/samsung/SamsungSans-Bold.woff') format('woff'),
+        url('#{$fontPath}/samsung/SamsungSans-Bold.ttf') format('truetype'),
+        url('#{$fontPath}/samsung/SamsungSans-Bold.svg#SamsungSans-Bold') format('svg');
+    font-weight: 700;
+    @include font-data;
+}
+
+@font-face {
+    font-family: 'EENobblee';
+    src: url('#{$fontPath}/EENobblee-Light.woff2') format('woff2'),
+        url('#{$fontPath}/EENobblee-Light.woff') format('woff');
+    font-weight: 100;
+    @include font-data;
+}
+
+@font-face {
+    font-family: 'EENobblee';
+    src: url('#{$fontPath}/EENobblee-Regular.woff2') format('woff2'),
+        url('#{$fontPath}/EENobblee-Regular.woff') format('woff');
+    font-weight: 400;
+    @include font-data;
+}
+
+@font-face {
+    font-family: 'EENobblee';
+    src: url('#{$fontPath}/EENobblee-Bold.woff2') format('woff2'),
+        url('#{$fontPath}/EENobblee-Bold.woff') format('woff');
+    font-weight: 500;
+    @include font-data;
+}
+
+@font-face {
+    font-family: 'Rubrik';
+    src: url('#{$fontPath}/Rubrik-Light.woff2') format('woff2'),
+        url('#{$fontPath}/Rubrik-Light.woff') format('woff');
+    font-weight: 100;
+    @include font-data;
+}
+ 
+@font-face {
+    font-family: 'Rubrik';
+    src: url('#{$fontPath}/Rubrik-SemiBold.woff2') format('woff2'),
+        url('#{$fontPath}/Rubrik-SemiBold.woff') format('woff');
+    font-weight: 700;
+    @include font-data;
+}
+
+@font-face {
+    font-family: 'Rubrik';
+    src: url('#{$fontPath}/Rubrik-Regular.woff2') format('woff2'),
+        url('#{$fontPath}/Rubrik-Regular.woff') format('woff');
+    font-weight: 400;
+    @include font-data;
+}
+

@@ -1,0 +1,163 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
+$fontSizes: (
+	h1: (30px, 30px, 40px),
+	h2: (27px, 27px, 38px),
+	//h2Reg: (30px, 55px, 55px),
+	//h2heading: (40px, 55px, 80px),
+	//h2subheading: (18px, 18px, 36px),
+	h3: (16px, 16px, 30px),
+	h4: (16px, 16px, 30px),
+	h5: (18px, 22px), 
+	subtitle: (14px, 16px),
+	tabtext: (16px, 18px),
+	introSmall: (18px),
+	introLarge: (36px),
+	body: (14px),
+	bodyLarge: (16px, 18px),
+	small: (12px),
+	text: (12px, 14px, 14px),
+	smalltext:(10px),
+	ptext:(12px),
+    footer: (14px)
+);
+
+$typeLineHeights: (
+	h1: (37px, 37px, 50px),
+	h2: (27px, 27px, 50px),
+	// h2Reg: (32px, 60.5px, 60.5px),
+	// h2heading: (40px, 55px, 80px),
+	//h2subheading: (21px, 21px, 42px),
+	h3: (20px, 20px, 40px),
+	h4: (20px, 20px, 38px),
+	h5: (30px),
+	subtitle: (16px, 20px),
+	tabtext: (18px, 20px),
+	body: (14px),
+	bodyLarge: (16px, 18px),
+	introSmall: (30px),
+	introLarge: (43px),
+	small: (20px),
+	text: (26px, 30px, 30px),
+	smalltext:(12px),
+	ptext:(16px),
+    footer: (20px)
+);
+
+$typography: (
+	headingkids: (
+		"samsung",
+		(h1, h2, h2heading)
+	),
+	headingBlank: (
+		"samsung",
+		(h1, h2)
+	),
+	heading: (
+		"samsung",    
+		(h1, h2, h3, h2heading, h2Reg)
+	),
+	subheading: (
+		"samsung",    
+		(h2subheading)
+	),
+	title: (
+		"samsung",
+		(h2, h3, h4, h5) 
+	),
+	sub-title: (  
+		"samsung",
+		(subtitle) 
+	),
+	tab-text: (
+		"samsung",
+		(tabtext)
+	),
+	intro: (
+		"samsung",
+		(h4, introSmall, introLarge)
+	),
+	small: (
+		"samsung",
+		(small, title)
+	),
+	body: (
+		"samsung",
+		(body, text)
+	),
+	body-large: (
+		"samsung",
+		(bodyLarge)
+	),
+	smalltext: (
+		"samsung",
+		(smalltext, smalltext, ptext)
+	),
+	text:( 
+		"samsung",
+		(text,footer)
+	)
+);
+
+@mixin getStyle($font, $size, $bold: false, $italic: false) {
+	$styleName: map-get($typography, $font);
+	$allowedSizes: nth($styleName, 2);
+
+	// Validate if the font-size is allowed
+	$i: index($allowedSizes, $size);
+
+	@if $i {
+		$fontSizes: map-get($fontSizes, $size);
+		$lineHeights: map-get($typeLineHeights, $size);
+
+		font-family: nth($styleName, 1);
+		font-size: nth($fontSizes, 1);
+		line-height: nth($lineHeights, 1);
+		font-weight: initial;
+
+		@if length($fontSizes) > 1 {
+			@include media-breakpoint-up(sm) {
+				// font-size first
+				font-size: nth($fontSizes, 2);
+
+				// Then line-height
+				@if length($lineHeights) > 1 {
+					line-height: nth($lineHeights, 2);
+				}
+			}
+
+		}
+		@if length($fontSizes) > 2 {
+			@include media-breakpoint-up(md) {
+				// font-size first
+				font-size: nth($fontSizes, 3);
+
+				// Then line-height
+				@if length($lineHeights) > 2 {
+					line-height: nth($lineHeights, 3);
+				}
+			}
+		}
+
+	} @else {
+		@error "The style you are trying to use is not valid. Please refer to the styleguide (http://localhost:8080/style-guide/index.html#typography) for reference.";
+	}
+}
+// Generate CSS classes
+@each $styleName, $props in $typography {
+	@each $sizes in nth($props, 2) {
+		@if $styleName != $sizes {
+			.#{$styleName}--#{$sizes}, .#{$styleName} {
+				@include getStyle($styleName, $sizes);
+			}
+		} @else {
+			.#{$styleName} {
+				@include getStyle($styleName, $sizes);
+			}
+		}
+	}
+}
+
+

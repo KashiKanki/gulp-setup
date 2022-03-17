@@ -1,0 +1,15 @@
+@import "./core/bootstrap-config"; 
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+@import "./core/colors";
+@import "./core/spacers";
+@import "./core/common-classes.scss";
+@import "./core/font";
+@import "./core/typography";
+@import "./core/base";
+@import "./core/cta";
+@import "./core/input";
+
+@import 'components/hero';
+@import 'core/nav'; 

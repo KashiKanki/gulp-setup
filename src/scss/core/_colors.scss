@@ -1,0 +1,63 @@
+$colorPalette: (
+	// Brand colours
+	blue: #1428A0,
+    white: #FFFFFF,
+    black: #000000,
+    sky-blue: #0077C8,
+    sea-blue: #00B3E3,
+    saffron: #FFB546,
+    coral: #D93830,
+    gray1: #363636,
+    gray2: #6E6E6E,
+    gray3: #767676,
+    gray4: #9E9E9E,
+    gray5: #AAAAAA,
+    gray6: #D6D6D6,
+    gray7: #E5E5E5,
+    gray8: #F7F7F7,
+	dark-teal: #005A61,
+    light-yellow: #FAE64D,
+	yellow: #FFE600,
+	dark-yellow: #F5D500,
+	slate: #6D6E71,
+	coal: #3C3D41, 
+	silver: #A9A9A9,
+	stone: #D8D8D9,
+	fog: #F4F4F4,
+	red: #E9020B,
+	green: #178804,
+    emerald: #179C9B,
+    eeaqua: #009C9C
+);
+
+@function getColor($color) {
+    @return map-get($colorPalette, $color);
+}
+
+@each $colorName, $color in $colorPalette {
+    .bg--#{'' + $colorName} {
+        background-color: $color;
+    }
+
+    .border--#{'' + $colorName} {
+        border-color: $color !important;
+    }
+
+    .color--#{'' + $colorName} {
+        color: $color;
+    }
+
+    .marker--bg--#{'image--' + $colorName} {
+        span,
+        b {
+            background-image: linear-gradient(to bottom, $color 0, $color 100%);
+        }
+    }
+
+    .marker--color--#{'' + $colorName} {
+        span,
+        b {
+            color: $color;
+        }
+    }
+}

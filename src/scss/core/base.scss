@@ -1,0 +1,168 @@
+html,body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	/*overflow-x: hidden;*/
+}
+
+fieldset,
+figure {
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+p, ul, ol, dl {
+	margin: 0;
+}
+
+ul, ol, li {
+	margin-top: 0;
+	margin-right: 0;
+	margin-left: 0;
+	padding: 0;
+}
+
+ul, ol {
+	padding-left: 1em;
+
+	ul, ol {
+		margin-bottom: 0;
+	}
+}
+
+a {
+	color: getColor("teal");
+	text-decoration: dotted;
+
+	&:focus,
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+hr {
+	display: block;
+	border: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+/* Some HTML5 Elements Support */
+main {
+	display: block;
+}
+
+legend {
+	padding: 0;
+}
+
+::-webkit-input-placeholder {
+	/* Chrome/Opera/Safari */
+	color: getColor("slate");
+}
+::-moz-placeholder {
+	/* Firefox 19+ */
+	color: getColor("slate");
+}
+:-ms-input-placeholder {
+	/* IE 10+ */
+	color: getColor("slate");
+}
+:-moz-placeholder {
+	/* Firefox 18- */
+	color: getColor("slate");
+}
+
+button:focus,
+:focus {
+	@include media-breakpoint-down(md) {
+		outline: none;
+	}
+}
+
+//Generic Style rule for Oreo
+h1 {
+	@include getStyle("heading", "h1");
+	color: getColor(black); 
+	font-weight: 700;
+}
+
+h2 {
+	@include getStyle("title", "h2");
+	color: getColor(black);
+	font-weight: 700;
+}
+
+h3 {
+	@include getStyle("title", "h3");
+	font-weight: 700;
+}
+
+h4, h6 {
+	@include getStyle("title", "h4");
+	font-weight: 700;
+}
+h5 {
+	@include getStyle("title", "h5");
+}
+
+p {
+	@include getStyle("body", "body");
+	font-weight: 400;
+}
+label {
+	@include getStyle("body", "body");
+}
+
+a {
+	text-decoration: none;
+	display: inline-block;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.intro-small {
+    @include getStyle("intro", "introSmall");
+    text-transform: uppercase;
+    letter-spacing: 1.4em;
+}
+.intro-big {
+    @include getStyle("intro", "introLarge");
+    text-transform: uppercase;
+    letter-spacing: 1.4em;
+}
+.tab-text {
+	@include getStyle("tab-text", "tabtext");
+	font-weight: 700;
+}
+.body-large {
+	@include getStyle("body-large", "bodyLarge");
+	font-weight: 400;
+}
+
+// Style Guide code
+.style-guide {
+	@include getStyle("body", "body");
+}
+code{
+	color: $red; 
+	color: getColor("black"); 
+}
+.color-swatches {
+	height: 120px;
+	width: 120px;
+	display: inline-block;
+	border: 1px solid $black;
+	&.secondary {
+		height: 54px;
+		border: 0 none;
+	}
+}
